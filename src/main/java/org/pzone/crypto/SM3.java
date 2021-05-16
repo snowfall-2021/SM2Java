@@ -187,24 +187,4 @@ public class SM3 {
         byteArray[3] = (byte) (i & 0xFF);
         return byteArray;
     }
-    private static String byteToHexString(byte b) {
-        int n = b;
-        if (n < 0)
-            n = 256 + n;
-        int d1 = n / 16;
-        int d2 = n % 16;
-        return ""+hexDigits[d1] + hexDigits[d2];
-    }
-
-	public static String byteArrayToHexString(byte[] b) {
-        StringBuilder resultSb = new StringBuilder();
-        for (byte value : b) {
-            resultSb.append(byteToHexString(value));
-        }
-        return resultSb.toString();
-    }
-
-    public static void main(String[] args) throws IOException {
-        System.out.println(SM3.byteArrayToHexString(SM3.hash("test sm3 hash".getBytes())));
-    }
 }
