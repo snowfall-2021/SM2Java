@@ -1,11 +1,11 @@
 package org.pzone.crypto;
 
 import org.bouncycastle.math.ec.ECPoint;
+
 import java.math.BigInteger;
 import java.util.Scanner;
 
 public class SM2JAVA {
-
 
     public static void main(String[] args) {
 
@@ -14,24 +14,13 @@ public class SM2JAVA {
             System.out.print("sm2java# ");
             String command = scan.nextLine();
             switch (getCommand(command)) {
-                case 1:
-                    generateKeyPair();
-                    break;
-                case 2:
-                    encryptCommand();
-                    break;
-                case 3:
-                    decryptCommand();
-                    break;
-                case 4:
-                    help();
-                    break;
-                case 5:
-                    return;
-                case 0:
-                    break;
-                default:
-                    cnf(command);
+                case 1 -> generateKeyPair();
+                case 2 -> encryptCommand();
+                case 3 -> decryptCommand();
+                case 4 -> help();
+                case 5 -> { return; }
+                case 0 -> { }
+                default -> cnf(command);
             }
         }
     }
@@ -55,7 +44,7 @@ public class SM2JAVA {
             String ciphertext = encrypt(cleartext, publicKey);
             System.out.println("Result: " + ciphertext);
         } else {
-            System.out.println("Invalid public key");
+            System.out.println("Invalid public key.");
         }
     }
 
@@ -74,7 +63,7 @@ public class SM2JAVA {
             String cleartext = decrypt(ciphertext, privateKey);
             System.out.println("Result: " + cleartext);
         } else {
-            System.out.println("Invalid private key");
+            System.out.println("Invalid private key.");
         }
     }
 
@@ -109,11 +98,7 @@ public class SM2JAVA {
         };
     }
 
-    private static boolean checkPublicKey(String publicKey) {
-        return publicKey.length() == 128;
-    }
+    private static boolean checkPublicKey(String publicKey) { return publicKey.length() == 128; }
 
-    private static boolean checkPrivateKey(String privateKey) {
-        return privateKey.length() == 64;
-    }
+    private static boolean checkPrivateKey(String privateKey) { return privateKey.length() == 64; }
 }
