@@ -1,11 +1,11 @@
 package org.pzone.crypto;
 
 import org.bouncycastle.math.ec.ECPoint;
-
 import java.math.BigInteger;
 import java.util.Scanner;
 
-public class FinalTest {
+public class SM2JAVA {
+
 
     public static void main(String[] args) {
 
