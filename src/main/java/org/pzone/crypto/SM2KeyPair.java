@@ -6,7 +6,9 @@ import java.math.BigInteger;
 
 /**
  * SM2密钥对Bean
+ *
  * @author Potato
+ *
  */
 public class SM2KeyPair {
 

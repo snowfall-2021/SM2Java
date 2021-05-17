@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 /**
  * SM3杂凑算法实现
+ *
  * @author Potato
  *
  */
@@ -23,6 +24,7 @@ public class SM3 {
     private static final byte[] ZeroPadding = {(byte) 0x00};
 
     private static int T(int j) {
+
         if (j >= 0 && j <= 15) {
             return Tj15;
         } else if (j >= 16 && j <= 63) {
@@ -33,6 +35,7 @@ public class SM3 {
     }
 
     private static Integer FF(Integer x, Integer y, Integer z, int j) {
+
         if (j >= 0 && j <= 15) {
             return x ^ y ^ z;
         } else if (j >= 16 && j <= 63) {
@@ -45,6 +48,7 @@ public class SM3 {
     }
 
     private static Integer GG(Integer x, Integer y, Integer z, int j) {
+
         if (j >= 0 && j <= 15) {
             return x ^ y ^ z;
         } else if (j >= 16 && j <= 63) {
@@ -68,6 +72,7 @@ public class SM3 {
     }
 
     private static byte[] padding(byte[] source) throws IOException {
+
         long l = source.length * 8L;
         long k = 448 - (l + 1) % 512;
         if (k < 0) {
@@ -86,6 +91,7 @@ public class SM3 {
     }
 
     private static byte[] long2bytes(long l) {
+
         byte[] bytes = new byte[8];
         for (int i = 0; i < 8; i++) {
             bytes[i] = (byte) (l >>> ((7 - i) * 8));
@@ -94,6 +100,7 @@ public class SM3 {
     }
 
     public static byte[] hash(byte[] source) throws IOException {
+
         byte[] m1 = padding(source);
         int n = m1.length / (512 / 8);
         byte[] b;
@@ -108,6 +115,7 @@ public class SM3 {
     }
 
     private static byte[] CF(byte[] vi, byte[] bi) throws IOException {
+
         int a, b, c, d, e, f, g, h;
         a = toInteger(vi, 0);
         b = toInteger(vi, 1);
@@ -156,6 +164,7 @@ public class SM3 {
     }
 
     private static int toInteger(byte[] source, int index) {
+
         StringBuilder valueStr = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             valueStr.append(hexDigits[(byte) ((source[index * 4 + i] & 0xF0) >> 4)]);
@@ -165,8 +174,8 @@ public class SM3 {
 
     }
 
-    private static byte[] toByteArray(int a, int b, int c, int d, int e, int f,
-                                      int g, int h) throws IOException {
+    private static byte[] toByteArray(int a, int b, int c, int d, int e, int f, int g, int h) throws IOException {
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream(32);
         baos.write(toByteArray(a));
         baos.write(toByteArray(b));
@@ -180,6 +189,7 @@ public class SM3 {
     }
 
     public static byte[] toByteArray(int i) {
+
         byte[] byteArray = new byte[4];
         byteArray[0] = (byte) (i >>> 24);
         byteArray[1] = (byte) ((i & 0xFFFFFF) >>> 16);
