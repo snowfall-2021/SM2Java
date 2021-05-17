@@ -12,9 +12,7 @@ import java.util.Arrays;
 
 /**
  * SM2公钥加密算法实现 包括 -签名,验签 -密钥交换 -公钥加密,私钥解密
- * 
  * @author Potato
- *
  */
 public class SM2 {
 	private static final BigInteger n = new BigInteger(
@@ -145,9 +143,7 @@ public class SM2 {
 
 		ECPoint C1 = curve.decodePoint(C1Byte).normalize();
 
-		/*
-		 * 计算椭圆曲线点 S = [h]C1 是否为无穷点
-		 */
+		/* 计算椭圆曲线点 S = [h]C1 是否为无穷点 */
 		BigInteger h = ecc_bc_spec.getH();
 		if (h != null) {
 			ECPoint S = C1.multiply(h);
@@ -308,7 +304,13 @@ public class SM2 {
 		return null;
 	}
 
-	public String bytesToHex(byte[] bytes) {
+
+	/**
+	 * 比特数组转字符串
+	 * @param bytes 比特数组
+	 * @return 字符串
+	 */
+	public static String bytesToHex(byte[] bytes) {
 		final byte[] HEX_ARRAY = "0123456789abcdef".getBytes(StandardCharsets.US_ASCII);
 		byte[] hexChars = new byte[bytes.length * 2];
 		for (int j = 0; j < bytes.length; j++) {
@@ -319,7 +321,12 @@ public class SM2 {
 		return new String(hexChars, StandardCharsets.UTF_8);
 	}
 
-	public ECPoint hexToECPoint(String hex) {
+	/**
+	 * 十六进制数字字符串转椭圆曲线点
+	 * @param hex 十六进制数字字符串
+	 * @return 椭圆曲线点
+	 */
+	public static ECPoint hexToECPoint(String hex) {
 		String xString = hex.substring(0, 64);
 		String yString = hex.substring(64);
 		byte[] x_byte = hexStringToByteArray(xString);
@@ -329,6 +336,11 @@ public class SM2 {
 		return curve.createPoint(x_biginteger, y_biginteger);
 	}
 
+	/**
+	 * 字符串转比特数组
+	 * @param s 字符串
+	 * @return 比特数组
+	 */
 	public static byte[] hexStringToByteArray(String s) {
 		int len = s.length();
 		byte[] data = new byte[len / 2];

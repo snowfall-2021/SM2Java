@@ -5,10 +5,16 @@ import org.bouncycastle.math.ec.ECPoint;
 import java.math.BigInteger;
 import java.util.Scanner;
 
+/**
+ * SM2公钥加密与解密的应用程序
+ */
 public class SM2JAVA {
 
+    /**
+     * 主程序
+     * @param args null
+     */
     public static void main(String[] args) {
-
         Scanner scan= new Scanner(System.in);
         while (true) {
             System.out.print("sm2java# ");
@@ -25,15 +31,21 @@ public class SM2JAVA {
         }
     }
 
+    /**
+     * 提供一对密钥
+     */
     private static void generateKeyPair() {
-        SM2 x = new SM2();
-        SM2KeyPair keys = x.generateKeyPair();
+        SM2 sm2 = new SM2();
+        SM2KeyPair keys = sm2.generateKeyPair();
         ECPoint publicKey = keys.getPublicKey();
         BigInteger privateKey = keys.getPrivateKey();
         System.out.println("Public key: " + publicKey.getXCoord().toString() + publicKey.getYCoord().toString());
-        System.out.println("Private key: " + x.bytesToHex(privateKey.toByteArray()));
+        System.out.println("Private key: " + SM2.bytesToHex(privateKey.toByteArray()));
     }
 
+    /**
+     * 加密命令
+     */
     private static void encryptCommand() {
         Scanner scan= new Scanner(System.in);
         System.out.print("Enter cleartext: ");
@@ -48,11 +60,19 @@ public class SM2JAVA {
         }
     }
 
+    /**
+     * 加密
+     * @param cleartext 明文
+     * @param publicKey 公钥
+     * @return 密文
+     */
     private static String encrypt(String cleartext, String publicKey) {
-        SM2 x = new SM2();
-        return x.bytesToHex(x.encrypt(cleartext, x.hexToECPoint(publicKey)));
+        return SM2.bytesToHex(new SM2().encrypt(cleartext, SM2.hexToECPoint(publicKey)));
     }
 
+    /**
+     * 解密命令
+     */
     private static void decryptCommand() {
         Scanner scan= new Scanner(System.in);
         System.out.print("Enter ciphertext: ");
@@ -67,11 +87,20 @@ public class SM2JAVA {
         }
     }
 
+    /**
+     * 解密
+     * @param ciphertext 密文
+     * @param privateKey 私钥
+     * @return 明文
+     */
     private static String decrypt(String ciphertext, String privateKey) {
-        SM2 x = new SM2();
-        return x.decrypt(SM2.hexStringToByteArray(ciphertext), new BigInteger(SM2.hexStringToByteArray(privateKey)));
+        SM2 sm2 = new SM2();
+        return sm2.decrypt(SM2.hexStringToByteArray(ciphertext), new BigInteger(SM2.hexStringToByteArray(privateKey)));
     }
 
+    /**
+     * 显示帮助
+     */
     private static void help() {
         System.out.println("These commands are defined internally. Type `help' to see this list:\n");
         System.out.println("\tget key-pair\t generate a random SM2 key-pair.");
@@ -81,11 +110,20 @@ public class SM2JAVA {
         System.out.println("\texit\t\t\t exit sm2java.");
     }
 
+    /**
+     * 返回错误命令信息
+     * @param command 错误命令
+     */
     private static void cnf(String command) {
         System.out.println(command + ": command not found");
     }
 
 
+    /**
+     * 将命令转换为数字
+     * @param commandString 命令
+     * @return 命令码
+     */
     private static int getCommand(String commandString) {
         return switch (commandString) {
             case "get key-pair" -> 1;
@@ -98,7 +136,17 @@ public class SM2JAVA {
         };
     }
 
+    /**
+     * 检查公钥是否合法
+     * @param publicKey 公钥
+     * @return 公钥是否合法
+     */
     private static boolean checkPublicKey(String publicKey) { return publicKey.length() == 128; }
 
+    /**
+     * 检查私钥是否合法
+     * @param privateKey 私钥
+     * @return 私钥是否合法
+     */
     private static boolean checkPrivateKey(String privateKey) { return privateKey.length() == 64; }
 }

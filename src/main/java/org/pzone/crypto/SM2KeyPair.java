@@ -1,13 +1,12 @@
 package org.pzone.crypto;
 
-import java.math.BigInteger;
-
 import org.bouncycastle.math.ec.ECPoint;
+
+import java.math.BigInteger;
 
 /**
  * SM2密钥对Bean
  * @author Potato
- *
  */
 public class SM2KeyPair {
 
