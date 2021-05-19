@@ -68,7 +68,7 @@ public class SM2JAVA {
         if (checkPublicKey(publicKey)) {
             String ciphertext = encrypt(cleartext, publicKey);
             System.out.println("Result: " + ciphertext);
-            System.out.println("Result has been copied to clipboard");
+            System.out.println("Result has been copied to clipboard.");
             setClipboardString(ciphertext);
         } else {
             System.out.println("Invalid public key.");
@@ -102,7 +102,7 @@ public class SM2JAVA {
         if (checkPrivateKey(privateKey)) {
             String cleartext = decrypt(ciphertext, privateKey);
             System.out.println("Result: " + cleartext);
-            System.out.println("Result has been copied to clipboard");
+            System.out.println("Result has been copied to clipboard.");
             setClipboardString(cleartext);
         } else {
             System.out.println("Invalid private key.");
