@@ -2,6 +2,10 @@ package org.pzone.crypto;
 
 import org.bouncycastle.math.ec.ECPoint;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.math.BigInteger;
 import java.util.Scanner;
 
@@ -64,6 +68,8 @@ public class SM2JAVA {
         if (checkPublicKey(publicKey)) {
             String ciphertext = encrypt(cleartext, publicKey);
             System.out.println("Result: " + ciphertext);
+            System.out.println("Result has been copied to clipboard");
+            setClipboardString(ciphertext);
         } else {
             System.out.println("Invalid public key.");
         }
@@ -96,6 +102,8 @@ public class SM2JAVA {
         if (checkPrivateKey(privateKey)) {
             String cleartext = decrypt(ciphertext, privateKey);
             System.out.println("Result: " + cleartext);
+            System.out.println("Result has been copied to clipboard");
+            setClipboardString(cleartext);
         } else {
             System.out.println("Invalid private key.");
         }
@@ -174,4 +182,15 @@ public class SM2JAVA {
      *              是否合法
      */
     private static boolean checkPrivateKey(String privateKey) { return privateKey.length() == 64; }
+
+    /**
+     * 复制内容到剪切板
+     * @param text 内容
+     */
+    public static void setClipboardString(String text) {
+
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        Transferable trans = new StringSelection(text);
+        clipboard.setContents(trans, null);
+    }
 }
