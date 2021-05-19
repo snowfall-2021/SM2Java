@@ -242,9 +242,9 @@ public class SM2 {
 
 	public SM2() {
 
-		curve = new ECCurve.Fp(p, // q
-				a, // a
-				b); // b
+		curve = new ECCurve.Fp(p,
+				a,
+				b);
 		G = curve.createPoint(gx, gy);
 		ecc_bc_spec = new ECDomainParameters(curve, G, n);
 	}
