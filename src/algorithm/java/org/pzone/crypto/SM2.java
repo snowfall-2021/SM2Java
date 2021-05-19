@@ -12,9 +12,7 @@ import java.util.Arrays;
 
 /**
  * SM2公钥加密算法实现 包括 -签名,验签 -密钥交换 -公钥加密,私钥解密
- *
  * @author Potato
- *
  */
 public class SM2 {
 	private static final BigInteger n = new BigInteger("FFFFFFFE" + "FFFFFFFF" + "FFFFFFFF" + "FFFFFFFF" + "7203DF6B" + "21C6052B" + "53BBF409" + "39D54123", 16);
@@ -33,6 +31,10 @@ public class SM2 {
 	/**
 	 * 随机数生成器
 	 *
+	 * @param max
+	 * 			最大值
+	 * @return
+	 * 			随机数
 	 */
 	private static BigInteger random(BigInteger max) {
 
@@ -46,6 +48,10 @@ public class SM2 {
 	/**
 	 * 判断字节数组是否全0
 	 *
+	 * @param buffer
+	 * 			字节数组
+	 * @return
+	 * 			是否全0
 	 */
 	private boolean allZero(byte[] buffer) {
 
@@ -63,6 +69,8 @@ public class SM2 {
 	 * 			加密原文
 	 * @param publicKey
 	 * 			公钥
+	 * @return
+	 * 			加密结果
 	 */
 	protected byte[] encrypt(String input, ECPoint publicKey) {
 
@@ -123,6 +131,8 @@ public class SM2 {
 	 * 			密文数据字节数组
 	 * @param privateKey
 	 * 			解密私钥
+	 * @return
+	 * 			解密结果
 	 */
 	protected String decrypt(byte[] encryptData, BigInteger privateKey) {
 
@@ -172,14 +182,24 @@ public class SM2 {
 	}
 
 	/**
-	 * 判断是否在范围内
+	 * 判断数是否在范围内
 	 *
+	 * @param param
+	 * 			数
+	 * @param min
+	 * 			最小值
+	 * @return
+	 * 			是否在范围内
 	 */
 	private boolean between(BigInteger param, BigInteger min) { return param.compareTo(min) >= 0 && param.compareTo(SM2.p) < 0; }
 
 	/**
 	 * 判断生成的公钥是否合法
 	 *
+	 * @param publicKey
+	 * 			公钥
+	 * @return
+	 * 			是否合法
 	 */
 	private boolean checkPublicKey(ECPoint publicKey) {
 
@@ -197,7 +217,7 @@ public class SM2 {
 
 	/**
 	 * 生成密钥对
-	 *
+	 * @return 密钥对
 	 */
 	protected SM2KeyPair generateKeyPair() {
 
@@ -231,6 +251,10 @@ public class SM2 {
 	/**
 	 * 字节数组拼接
 	 *
+	 * @param params
+	 * 			若干字节数组
+	 * @return
+	 * 			拼接结果
 	 */
 	private static byte[] join(byte[]... params) {
 
@@ -250,6 +274,10 @@ public class SM2 {
 	/**
 	 * sm3摘要
 	 *
+	 * @param params
+	 * 			原始数据
+	 * @return
+	 * 			摘要值
 	 */
 	private static byte[] sm3hash(byte[]... params) {
 
@@ -264,9 +292,7 @@ public class SM2 {
 
 	/**
 	 * 密钥派生函数
-	 * 
-	 * @param klen
-	 * 			生成klen字节数长度的密钥
+	 * @param klen 生成klen字节数组长度的密钥
 	 */
 	private static byte[] KDF(byte[] Z, int klen) {
 
@@ -292,10 +318,10 @@ public class SM2 {
 
 
 	/**
-	 * 比特数组转字符串
+	 * 字节数组转字符串
 	 *
 	 * @param bytes
-	 * 			比特数组
+	 * 			字节数组
 	 * @return
 	 * 			字符串
 	 */
@@ -331,12 +357,12 @@ public class SM2 {
 	}
 
 	/**
-	 * 字符串转比特数组
+	 * 字符串转字节数组
 	 *
 	 * @param s
 	 * 			字符串
 	 * @return
-	 * 			比特数组
+	 * 			字节数组
 	 */
 	protected static byte[] hexStringToByteArray(String s) {
 

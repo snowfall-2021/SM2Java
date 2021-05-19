@@ -7,17 +7,13 @@ import java.util.Scanner;
 
 /**
  * SM2公钥加密与解密的应用程序-SM2JAVA-
- *
  * @author ult
- *
  */
 public class SM2JAVA {
 
     /**
      * 主程序
-     *
-     * @param args
-     *          null
+     * @param args null
      */
     public static void main(String[] args) {
 
@@ -133,9 +129,7 @@ public class SM2JAVA {
 
     /**
      * 返回错误命令信息
-     *
-     * @param command
-     *              错误命令
+     * @param command 错误命令
      */
     private static void cnf(String command) { System.out.println(command + ": command not found"); }
 
@@ -167,7 +161,7 @@ public class SM2JAVA {
      * @param publicKey
      *              公钥
      * @return
-     *              公钥是否合法
+     *              是否合法
      */
     private static boolean checkPublicKey(String publicKey) { return publicKey.length() == 128; }
 
@@ -177,7 +171,7 @@ public class SM2JAVA {
      * @param privateKey
      *              私钥
      * @return
-     *              私钥是否合法
+     *              是否合法
      */
     private static boolean checkPrivateKey(String privateKey) { return privateKey.length() == 64; }
 }

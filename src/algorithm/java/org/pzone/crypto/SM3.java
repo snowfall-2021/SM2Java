@@ -7,9 +7,7 @@ import java.util.Arrays;
 
 /**
  * SM3杂凑算法实现
- *
  * @author Potato
- *
  */
 public class SM3 {
 
